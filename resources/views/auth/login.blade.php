@@ -1,21 +1,21 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container">
-    <div class="row justify-content-center">
-        <div class="col-md-8">
-            <div class="card">
-                <div class="card-header">{{ __('Login') }}</div>
+<div class="w-full h-screen">
+    <div class="flex justify-center">
+        <div class="w-full max-w-lg shadow-lg mt-16 bg-gray-100">
+            <div class="border pb-6">
+                <div class="text-gray-700 text-2xl px-12 py-4 border-b mb-6">{{ __('Login') }}</div>
 
-                <div class="card-body">
+                <div>
                     <form method="POST" action="{{ route('login') }}">
                         @csrf
 
-                        <div class="form-group row">
-                            <label for="email" class="col-md-4 col-form-label text-md-right">{{ __('E-Mail Address') }}</label>
+                        <div class="mb-4 px-12">
+                            <label for="email" class="text-gray-700 text-sm uppercase">{{ __('E-Mail Address') }}</label>
 
-                            <div class="col-md-6">
-                                <input id="email" type="email" class="form-control @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
+                            <div class="py-2">
+                                <input id="email" type="email" class="bg-white border-2 rounded px-3 py-1 w-full @error('email') is-invalid @enderror" name="email" value="{{ old('email') }}" required autocomplete="email" autofocus>
 
                                 @error('email')
                                     <span class="invalid-feedback" role="alert">
@@ -25,11 +25,11 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
-                            <label for="password" class="col-md-4 col-form-label text-md-right">{{ __('Password') }}</label>
+                        <div class="mb-4 px-12">
+                            <label for="password" class="text-gray-700 text-sm uppercase">{{ __('Password') }}</label>
 
-                            <div class="col-md-6">
-                                <input id="password" type="password" class="form-control @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
+                            <div class="py-2">
+                                <input id="password" type="password" class="bg-white border-2 rounded px-3 py-1 w-full @error('password') is-invalid @enderror" name="password" required autocomplete="current-password">
 
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
@@ -39,26 +39,26 @@
                             </div>
                         </div>
 
-                        <div class="form-group row">
-                            <div class="col-md-6 offset-md-4">
+                        <div class="mb-4 px-12">
+                            <div class="py-2 offset-md-4">
                                 <div class="form-check">
                                     <input class="form-check-input" type="checkbox" name="remember" id="remember" {{ old('remember') ? 'checked' : '' }}>
 
-                                    <label class="form-check-label" for="remember">
+                                    <label  class="text-gray-700 text-sm uppercase" for="remember">
                                         {{ __('Remember Me') }}
                                     </label>
                                 </div>
                             </div>
                         </div>
 
-                        <div class="form-group row mb-4">
-                            <div class="col-md-8 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
+                        <div class="mb-4 px-12">
+                            <div class="flex justify-between items-center">
+                                <button type="submit" class="px-8 py-2 bg-blue-500 text-white rounded shadow font-bold">
                                     {{ __('Login') }}
                                 </button>
 
                                 @if (Route::has('password.request'))
-                                    <a class="btn btn-link" href="{{ route('password.request') }}">
+                                    <a class="text-sm text-blue-600" href="{{ route('password.request') }}">
                                         {{ __('Forgot Your Password?') }}
                                     </a>
                                 @endif
@@ -66,13 +66,13 @@
                         </div>
                     </form>
 
-                    <div class="row justify-content-center">
-                        <div class="col-md-8 ml-6">
-                            <div class="row">
+                    <div class="mt-8 border-t py-8">
+                        <div class="flex justify-between px-12">
+
                                 <div class="col">
                                     <a href="social/login/google">
-                                        <svg 
-                                            style="height:50px; width:50px"
+                                        <svg
+                                            class="w-8 h-8"
                                             xmlns="http://www.w3.org/2000/svg"
                                             aria-label="Google" role="img"
                                             viewBox="0 0 512 512"><rect
@@ -84,8 +84,8 @@
                                 </div>
                                 <div class="col">
                                     <a href="social/login/facebook">
-                                        <svg 
-                                            style="height:50px; width:50px"
+                                        <svg
+                                            class="w-8 h-8"
                                             xmlns="http://www.w3.org/2000/svg"
                                             aria-label="Facebook" role="img"
                                             viewBox="0 0 512 512"><rect
@@ -97,8 +97,8 @@
                                 </div>
                                 <div class="col">
                                     <a href="social/login/twitter">
-                                        <svg 
-                                            style="height:50px; width:50px"
+                                        <svg
+                                            class="w-8 h-8"
                                             xmlns="http://www.w3.org/2000/svg"
                                             aria-label="Twitter" role="img"
                                             viewBox="0 0 512 512"><rect
@@ -110,8 +110,8 @@
                                 </div>
                                 <div class="col">
                                     <a href="social/login/linkedin">
-                                        <svg 
-                                            style="height:50px; width:50px"
+                                        <svg
+                                            class="w-8 h-8"
                                             xmlns="http://www.w3.org/2000/svg"
                                             aria-label="LinkedIn" role="img"
                                             viewBox="0 0 512 512"
@@ -124,8 +124,8 @@
                                 </div>
                                 <div class="col">
                                     <a href="social/login/github">
-                                        <svg 
-                                            style="height:50px; width:50px"
+                                        <svg
+                                            class="w-8 h-8"
                                             xmlns="http://www.w3.org/2000/svg"
                                             aria-label="GitHub" role="img"
                                             viewBox="0 0 512 512"><rect
@@ -135,10 +135,10 @@
                                         </svg>
                                     </a>
                                 </div>
-                            </div>
+
                         </div>
                     </div>
-                    
+
                 </div>
             </div>
         </div>
