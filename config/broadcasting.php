@@ -37,7 +37,15 @@ return [
             'app_id' => env('PUSHER_APP_ID'),
             'options' => [
                 'cluster' => env('PUSHER_APP_CLUSTER'),
-                'useTLS' => true,
+                // 'useTLS' => true,
+                'encrypted' => env('WEBSOCKET_ENCRYPTED'),
+                'host' => env('WEBSOCKET_HOST'),
+                'port' => env('WEBSOCKET_PORT'),
+                'scheme' => env('WEBSOCKET_SCHEME'),
+                'curl_options' => [
+                    CURLOPT_SSL_VERIFYHOST => env('CURL_VERIFYHOST'),
+                    CURLOPT_SSL_VERIFYPEER => env('CURL_VERIFYPEER'),
+                ]
             ],
         ],
 

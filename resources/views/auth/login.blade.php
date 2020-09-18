@@ -5,7 +5,7 @@
     <div class="flex justify-center">
         <div class="w-full max-w-lg shadow-lg mt-16 bg-gray-100">
             <div class="border pb-6">
-                <div class="text-gray-700 text-2xl px-12 py-4 border-b mb-6">{{ __('Login') }}</div>
+                <div class="text-indigo-600 text-2xl px-12 py-4 border-b mb-6">{{ __('Login') }}</div>
 
                 <div>
                     <form method="POST" action="{{ route('login') }}">

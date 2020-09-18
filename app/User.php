@@ -8,7 +8,7 @@ use Illuminate\Notifications\Notifiable;
 use Illuminate\Database\Eloquent\SoftDeletes;
 use Laravel\Cashier\Billable;
 
-class User extends Authenticatable
+class User extends Authenticatable implements MustVerifyEmail
 {
     use Notifiable, SoftDeletes, Billable;
 
@@ -126,5 +126,10 @@ class User extends Authenticatable
     public function receivesBroadcastNotificationsOn()
     {
         return 'App.User.' . $this->id;
+    }
+
+    public function sites()
+    {
+        return $this->hasMany('App\Site', 'user_id', 'id');
     }
 }

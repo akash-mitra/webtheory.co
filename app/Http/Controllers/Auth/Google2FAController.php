@@ -20,8 +20,10 @@ class Google2FAController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('web');
+        $this->middleware('auth');
+        $this->middleware('password.confirm')->only('disable');
     }
+    
     /**
      *
      * @param \Illuminate\Http\Request $request
@@ -29,17 +31,17 @@ class Google2FAController extends Controller
      */
     public function enable(Request $request)
     {
-        //generate new secret
+        // generate new secret
         $secret = $this->generateSecret();
 
-        //get user
+        // get user
         $user = $request->user();
 
-        //encrypt and then save secret
+        // encrypt and then save secret
         $user->google2fa_secret = Crypt::encrypt($secret);
         $user->save();
 
-        //generate image for QR barcode
+        // generate image for QR barcode
         $imageDataUri = Google2FA::getQRCodeInline(
             $request->getHttpHost(),
             $user->email,
@@ -62,7 +64,7 @@ class Google2FAController extends Controller
     {
         $user = $request->user();
 
-        //make secret column blank
+        // make secret column blank
         $user->google2fa_secret = null;
         $user->save();
 

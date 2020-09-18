@@ -5,12 +5,14 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Cache;
+use Illuminate\Support\Str;
+use App\Http\Requests\SubscriptionRequest;
 use Stripe\Stripe;
 use DB;
 use Exception;
 use App\User;
-use App\Plan;
-use App\Http\Resources\Plan as PlanResource;
+use App\Site;
+use App\Notifications\SiteDeployment as SiteDeploymentNotification;
 
 class SubscriptionController extends Controller
 {
@@ -24,165 +26,196 @@ class SubscriptionController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
+        // Set the API Key
+        Stripe::setApiKey(env("STRIPE_SECRET"));
     }
 
-    /**
-     * Display a listing of the resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function index()
-    {
-        // Check is subscribed
-        $account = Auth::user()->accounts; // Account
-
-        if ($account->subscribed('main')) {
-            // If subscribed get the subscription
-            $subscription = $account->subscription('main');
-            $plan = Plan::where('stripe_plan', $subscription->stripe_plan)->first();
-            $plan = new PlanResource($plan);
-            $is_subscribed = true;
-        } elseif (!empty($account->stripe_id)) {
-            $plan = DB::table('plans')
-                ->join('subscriptions', 'plans.stripe_plan', '=', 'subscriptions.stripe_plan')
-                ->select('plans.name', 'plans.description', 'plans.cost', 'plans.currency', 'plans.cycle', 'plans.slug')
-                ->where('account_id', Auth::user()->account_id)
-                ->first();
-            $is_subscribed = false;
-        } else {
-            $plan = '';
-            $is_subscribed = false;
-        }
-
-        return view('subscription.index', compact('plan', 'is_subscribed'));
-    }
-
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
     public function create()
     {
         $user = Auth::user();
-        // $plans = Cache::remember('stripe.plans', 60*24, function () { return $plans });
-        // Set the API Key
-        Stripe::setApiKey(env("STRIPE_SECRET"));
-        $plans = \Stripe\Plan::all()->data;
-        foreach($plans as $plan) {
-            $plan->product = \Stripe\Product::retrieve($plan->product);
-        }
         
-        // Check if user is subscribed
-        $is_subscribed = $user->subscribed('main');
-        if ($is_subscribed) {
-            $subscribed_plan = $user->subscription('main')->stripe_plan;
-        } else {
-            $subscribed_plan = null;
-        }
+        $plans = $this->plans();
 
-        $user->createOrGetStripeCustomer([
-            'name' => $user->name,
-            'email' => $user->email,
-            'description' => $user->id . '-' . strtolower($user->name)
-        ]);
+        $user->createOrGetStripeCustomer($this->customer($user));
         
         $paymentMethods = $user->paymentMethods();
 
         if ($paymentMethods)
             $intent = $user->createSetupIntent();
         
-        return view('subscription.form', compact('plans', 'subscribed_plan', 'intent'));
+        $site_name = null;
+        $subscribed_plan = null;
+        $mode = 'create';
+
+        return view('subscription.form', compact('plans', 'intent', 'site_name', 'subscribed_plan', 'mode'));
     }
 
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request)
+    public function store(SubscriptionRequest $request)
     {
-        // Validate Request
-        $this->validate($request, ['stripeToken' => 'required', 'plan_id' => 'required']);
-        
         $user = Auth::user();
-
+        
         try {
-            // Check already subscribed and if already subscribed with picked plan
-            if ($user->subscribed('main')) {
+            // Check if user has any subscription
+            if ($user->subscribed('main')) {            
                 if ($user->subscribedToPlan($request->plan_id, 'main')) {
-                    return redirect()->back()->with('flash', 'You are already subscribed to this plan!');
+                    // It's a new site with an existing subscribed plan
+                    $user->subscription('main')->incrementQuantity(1, $request->plan_id);
                 } else {
-                    // Swap to a different plan
-                    $user->subscription('main')->swap($request->plan_id);
+                    // It's a new site with a new plan
+                    $user->subscription('main')->addPlanAndInvoice($request->plan_id);
                 }
             } else {
-                // It's a new subscription
-                // if user has a coupon, create new subscription with coupon applied
-                if ($coupon = $request->get('coupon')) {
-                    $user->newSubscription('main', $request->plan_id)
-                        ->withCoupon($coupon)
-                        ->create($request->stripeToken, [
-                            'name' => $user->name,
-                            'email' => $user->email,
-                            'description' => $user->id . '-' . strtolower($user->name)
-                        ]);
-                } else {
-                    // Create subscription
-                    $user->newSubscription('main', $request->plan_id)->create($request->stripeToken, [
-                        'name' => $user->name,
-                        'email' => $user->email,
-                        'description' => $user->id . '-' . strtolower($user->name)
-                    ]);
-                }
+                // Create a new subscription
+                $user->newSubscription('main', $request->plan_id)->create($request->stripeToken, $this->customer($user));
             }
+
+            $site = $this->createSite($request);
         } catch (\Exception $e) {
-            // Catch any error from Stripe API request and show
             return redirect()->back()->with('flash', $e->getMessage());
         }
 
         // Subscribed successfully
-        return redirect()->back()->with('flash', 'You are now subscribed to ' . $request->plan_id);
+        return redirect()->route('home')->with('flash', 'Subscription successful. Site build is in progress');
     }
 
-    /**
-     * Update the specified resource in storage.
-     * Handle Resume subscription
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @param string $plan_slug
-     * @return @return \Illuminate\Http\RedirectResponse
-     */
-    public function update(Request $request, $plan_slug)
+    public function edit(Request $request, $site_uid)
     {
         $user = Auth::user();
+        
+        $plans = $this->plans();
 
-        try {
-            $user->subscription('main')->resume();
-        } catch (\Exception $e) {
-            return response()->json(['message' => $e->getMessage()], 422);
-        }
+        $user->createOrGetStripeCustomer($this->customer($user));
+        
+        $paymentMethods = $user->paymentMethods();
 
-        return response()->json(['flash' => 'Glad to see you back. Your Subscription has been resumed.'], 202);
+        if ($paymentMethods)
+            $intent = $user->createSetupIntent();
+        
+        $site = Site::where([['user_id', Auth::id()],['site_uid', $site_uid]])->first();
+        $site_name = $site->name;
+        $subscribed_plan = $site->stripe_plan;
+        $mode = 'edit';
+
+        return view('subscription.form', compact('plans', 'intent', 'site_name', 'subscribed_plan', 'mode', 'site_uid'));
     }
 
-    /**
-     * Remove the specified resource from storage.
-     *
-     * @param  string  $plan_slug
-     * @return \Illuminate\Http\Response
-     */
-    public function destroy($plan_slug)
+    public function update(SubscriptionRequest $request, $site_uid)
     {
-        $user = Auth::user;
+        $user = Auth::user();
+        
+        $site = Site::where([['user_id', Auth::id()],['site_uid', $site_uid]])->first();
 
         try {
-            $user->subscription('main')->cancel();
+            if ($user->subscribedToPlan($request->plan_id, 'main')) {
+                // There is an existing subscribed plan, increment for new site
+                $user->subscription('main')->incrementQuantity(1, $request->plan_id);
+            } else {
+                // There is no existing subscription plan, create for new site
+                $user->subscription('main')->addPlanAndInvoice($request->plan_id);
+            }
+            
+            // Remove existing subscription plan for the site
+            $subscriptionItem = $user->subscription('main')->findItemOrFail($site->stripe_plan);
+            if ($subscriptionItem->quantity > 1) {
+                $user->subscription('main')->decrementQuantity(1, $site->stripe_plan);
+            } else {
+                $user->subscription('main')->removePlan($site->stripe_plan);
+            }
+
+            $site = $this->modifySite($request, $site);
         } catch (\Exception $e) {
             return redirect()->back()->with('flash', $e->getMessage());
         }
 
-        return response()->json(null, 204);
+        // Subscribed successfully
+        return redirect()->route('home')->with('flash', 'Subscription change successful. Site rebuild is in progress');
+    }
+    
+    public function destroy($site_uid)
+    {
+        $user = Auth::user();
+
+        $site = Site::where([['user_id', Auth::id()],['site_uid', $site_uid]])->first();
+
+        try {
+            // Remove existing subscription plan for the site
+            $subscriptionItem = $user->subscription('main')->findItemOrFail($site->stripe_plan);
+            if ($subscriptionItem->quantity > 1) {
+                $user->subscription('main')->decrementQuantity(1, $site->stripe_plan);
+            } else {
+                $subscriptionItem = $user->subscription('main')->items->first();
+                if ($subscriptionItem->stripe_plan <> $site->stripe_plan) {
+                    $user->subscription('main')->removePlan($site->stripe_plan);
+                } else {
+                    $user->subscription('main')->cancelNow();
+                }
+                    
+            }
+
+            $site = $this->deleteSite($site);
+        } catch (\Exception $e) {
+            return redirect()->back()->with('flash', $e->getMessage());
+        }
+
+        return redirect()->route('home')->with('flash', 'Subscription deleted. Site has been destroyed');
+    }
+
+    public function plans()
+    {
+        return Cache::remember('stripe.plans', 60*24, function () { 
+            $plans = \Stripe\Plan::all()->data;
+            foreach($plans as $plan) {
+                $plan->product = \Stripe\Product::retrieve($plan->product);
+            }
+
+            return $plans;
+        });
+    }
+
+    private function customer($user)
+    {
+        return [
+            'name' => $user->name,
+            'email' => $user->email,
+            'description' => $user->id . '-' . strtolower($user->name)
+        ];
+    }
+
+    private function createSite($request)
+    {
+        $site = new Site([
+            'site_uid' => Str::random(30),
+            'user_id' => Auth::id(),
+            'stripe_plan' => $request->plan_id,
+            'name' => $request->site_name,
+            'status' => 'active',
+        ]);
+        $site->save();
+        
+        // Deploy a webtheory booty
+        
+        Auth::user()->notify(new SiteDeploymentNotification($site));
+
+        return $site;
+    }
+
+    private function modifySite($request, $site)
+    {
+        $site->stripe_plan = $request->plan_id;
+        $site->save();
+        
+        // Re-Deploy a webtheory booty
+        
+        return $site;
+    }
+
+    private function deleteSite($site)
+    {
+        $site->status = 'cancelled';
+        $site->save();
+        $site->delete();
+        // Destroy a webtheory booty
+        
+        return $site;
     }
 }
