@@ -19,8 +19,9 @@ class CreateSitesTable extends Migration
             $table->unsignedBigInteger('user_id');
             $table->string('stripe_plan');
             $table->string('name');
-            $table->string('domain')->nullable();
-            $table->string('ipaddress')->nullable();
+            $table->unsignedBigInteger('booty_id')->nullable();
+            $table->string('domain_name')->nullable();
+            $table->string('ip_address')->nullable();
             $table->string('admin_email')->nullable();
             $table->text('settings')->nullable();
             $table->string('status');

@@ -33,15 +33,17 @@
     </div>
 
     <script src="{{ asset('js/app.js') }}"></script>
-
-    <script>
-        var userId = '{{ Auth::user()->id }}';
-        Echo.private('App.User.' + userId)
-            .notification((notification) => {
-                console.log(notification.type);
-                // flash({type: 'success', message: 'Message: ' + notification.message + '\r\nAction: ' + notification.action});
-        });
-    </script>
+    
+    @auth
+        <script>
+            var userId = '{{ Auth::user()->id }}';
+            Echo.private('App.User.' + userId)
+                .notification((notification) => {
+                    console.log(notification.type);
+                    // flash({type: 'success', message: 'Message: ' + notification.message + '\r\nAction: ' + notification.action});
+            });
+        </script>
+    @endauth
 
     @yield('scripts')
 

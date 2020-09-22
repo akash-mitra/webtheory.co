@@ -12,6 +12,7 @@ use DB;
 use Exception;
 use App\User;
 use App\Site;
+use App\DeployWebtheory;
 use App\Notifications\SiteDeployment as SiteDeploymentNotification;
 
 class SubscriptionController extends Controller
@@ -193,7 +194,7 @@ class SubscriptionController extends Controller
         $site->save();
         
         // Deploy a webtheory booty
-        
+        // DeployWebtheory::createBooty($site);
         Auth::user()->notify(new SiteDeploymentNotification($site));
 
         return $site;
@@ -205,7 +206,7 @@ class SubscriptionController extends Controller
         $site->save();
         
         // Re-Deploy a webtheory booty
-        
+        // DeployWebtheory::recreateBooty($site);
         return $site;
     }
 
@@ -215,7 +216,7 @@ class SubscriptionController extends Controller
         $site->save();
         $site->delete();
         // Destroy a webtheory booty
-        
+        // DeployWebtheory::deleteBooty($site);
         return $site;
     }
 }

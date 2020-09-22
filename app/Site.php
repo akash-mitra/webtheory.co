@@ -15,7 +15,7 @@ class Site extends Model
      * @var array
      */
     protected $fillable = [
-        'site_uid', 'user_id', 'stripe_plan', 'name', 'domain', 'ipaddress', 'admin_email', 'settings', 'status', 
+        'site_uid', 'user_id', 'stripe_plan', 'name', 'booty_id', 'domain_name', 'ip_address', 'admin_email', 'settings', 'status', 
     ];
 
     /**

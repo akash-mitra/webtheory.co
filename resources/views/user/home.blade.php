@@ -32,8 +32,8 @@
                                             <td class="px-4 py-2 align-middle text-xs">{{ $site->site_uid }}</td>
                                             <td class="px-4 py-2 align-middle text-xs">{{ $site->name }}</td>
                                             <td class="px-4 py-2 align-middle text-xs">{{ $site->stripe_plan }}</td>
-                                            <td class="px-4 py-2 align-middle text-xs">{{ $site->domain }}</td>
-                                            <td class="px-4 py-2 align-middle text-xs">{{ $site->ipaddress }}</td>
+                                            <td class="px-4 py-2 align-middle text-xs">{{ $site->domain_name }}</td>
+                                            <td class="px-4 py-2 align-middle text-xs">{{ $site->ip_address }}</td>
                                             <td class="px-4 py-2 align-middle text-xs">{{ $site->status }}</td>
                                             <td class="px-4 py-2 align-middle text-xs flex ">
                                                 <a href="{{ route('subscriptions.edit', $site->site_uid) }}" class="mb-1 cursor-pointer text-blue no-underline" title="Change Plan">
