@@ -1,194 +1,323 @@
-@extends('layouts.app')
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>WebTheory</title>
 
-@section('content')
-<main class="w-full bg-white">
-	<section class="flex flex-col">
-	  	<div class="flex flex-col pt-20 z-10">
-			<div class="items-center text-center">
-		  		<h1 class="text-indigo-600 text-5xl font-bold">Be the Voice. Not the Echo.</h1>
-		  		<p class="text-2xl"><span class="border-b-8 border-green-200 pb-1">Web-Superiority Platform</span> for Modern Content Creators, Influencers & Businesses</p>
-			</div>
-	  	</div>
+    <!-- Google fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Eczar:wght@400;700&family=Open+Sans:wght@300;400;700&display=swap" rel="stylesheet">
 
-		<div class="relative z-0 py-10">
-			<img src="images/main-group.svg" alt="" class="relative w-full z-10 object-contain" />
-			<img src="images/ballon-stars.svg" alt="" class="absolute left-0 bottom-0 z-10 object-contain" />
-			<div class="absolute inset-0 flex flex-col">
-				<div class="bg-white" style="height: 55%;"></div>
-				<div class="bg-gray-900" style="height: 45%;"></div>
-			</div>
-		</div>
+    <!-- Styles -->
+    <link rel="stylesheet" href="/css/main.min.css">
 
-	  	<div class="bg-gray-900 md:-mt-64 xl:-mt-64">
-			<div class="relative z-10 container pt-32 lg:pt-16 pb-16 flex items-end">
-				<img src="images/ballons.svg" alt="" class="object-contain hidden lg:block" />
-				<div class="flex flex-col items-center lg:items-start text-center lg:text-left lg:justify-end text-gray-400 lg:pl-10 lg:pb-1">
-					<h2 class="text-3xl font-serif font-bold text-yellow-500">Sign Up for Private Beta Today!</h2>
-					<p class="text-xl py-5">WebTheory is in private beta. But if you are Interested to try out WebTheory now, do let us know below. We will allocate you as soon as new private beta slots are available.</p>
-					<form action="" class="flex justify-center lg:justify-start text-2xl font-serif mt-3 self-stretch">
-						<input type="text" class="bg-white rounded-lg shadow-inner text-gray-200 p-3 w-2/3" placeholder="Enter your email ID" />
-						<button type="button" class="px-10 bg-indigo-600 text-white rounded-lg shadow-lg flex-shrink-0 ml-6">Sign Up</button>
-					</form>
-				</div>
-			</div>
-	  	</div>
-	</section>
-	
-	<section class="flex flex-col items-center py-8 lg:py-16">
-		<div class="flex flex-col items-center container text-center lg:text-left">
-			<h2 class="text-indigo-600 text-5xl">Go Viral, Break the Internet!</h2>
-			<p class="text-xl lg:text-3xl">WebTheory is like no other CMS. It is opinionated, radical and foxy.</p>
-		</div>
-		<div class="bg-gray-100 py-8 mt-8 w-full">
-			<div class="grid grid-cols-4 md:grid-cols-12 gap-10 container">
-			<div class="col-span-4 flex flex-col">
-				<h3 class="text-2xl lg:text-3xl font-serif text-indigo-700 font-bold mb-5">No Plugin Mess</h3>
-				<p class="text-base lg:text-lg">WebTheory comes prepacked with all the essential features you will realistically ever need. So, no more installing of low-grade third party plugins and modules.</p>
-			</div>
-			<div class="col-span-4 flex flex-col">
-				<h3 class="text-2xl lg:text-3xl font-serif text-indigo-600 font-bold mb-5">Tools for Business</h3>
-				<p class="text-base lg:text-lg">Run your business from home with the ability to sell contents directly from your site, publish Ads from various networks and manage users and subscriptions.</p>
-			</div>
-			<div class="col-span-4 flex flex-col">
-				<h3 class="text-2xl lg:text-3xl font-serif text-indigo-600 font-bold mb-5">Blazing Fast Performance</h3>
-				<p class="text-base lg:text-lg">Each WebTheory site is hosted on highly optimised and specifically configured dedicated SSD servers, with in-built global CDN, automated backups and full SSL support.</p>
-			</div>
-			</div>
-		</div>
-	</section>
+</head>
+<body>
+    <!-- Header -->
+    <header class="h-24">
+        <div class="h-full m-auto max-w-1920 px-6 sm:px-4_5xl md:px-18 flex items-center justify-between relative">
 
-	<section class="container grid grid-cols-12 gap-10 py-8 lg:py-16 items-center">
-		<div class="flex flex-col col-span-6">
-			<h3 class="text-2xl lg:text-3xl font-serif text-indigo-600 font-bold mb-5">Create Engaging Blog Posts using Content Compositions</h3>
-			<p class="text-base lg:text-xl">Content Compositions allow you to embed rich media and flexible design elements in your blog posts making them standout in the world of boring medium-like blog posts.</p>
-		</div>
-		<div class="col-span-6 h-full">
-			<img src="images/story 3 image.svg" alt="" class="h-full" />
-		</div>
-	</section>
+            <!-- Logo -->
+            <div class="flex items-center">
+                <a href="/">
+                    <img class="inline-block" src="img/logo.svg" alt=">">
+                    <span class="font-eczar text-indigo-primary text-2xl sm:text-t175 font-bold ml-2 sm:ml-6">WebTheory</span>
+                </a>
+            </div>
 
-	<section class="relative">
-	  	<div class="container grid grid-cols-12 gap-10 py-8 lg:py-16 items-center">
-			<div class="col-span-6 h-full">
-			<img src="images/story 2 image.svg" alt="" class="h-full" />
-			</div>
-			<div class="flex flex-col col-span-6">
-			<h3 class="text-2xl lg:text-3xl font-serif text-indigo-600 font-bold mb-5">Run Online Business from Home</h3>
-			<p class="text-base lg:text-xl">WebTheory comes with all the tools to help you run your online business from the comfort of your home. Run multiple Ad services, accept payments, create subscription plan, sell your contents - all from a single platform without additional fee.</p>
-			</div>
-	  	</div>
-	  	<div class="absolute bottom-0 left-0 right-0">
-			<svg viewBox="0 0 1438 285" fill="none" xmlns="http://www.w3.org/2000/svg" class="w-full">
-				<path d="M0 38.5288C0 38.5288 285.405 125.219 719 38.5288C1152.6 -48.1611 1438 38.5288 1438 38.5288V285H0V38.5288Z" fill="#F7DF18" fill-opacity="0.1" />
-			</svg>
-	  	</div>
-	</section>
+            <!-- Menu -->
+            <nav>
+                <ul class="flex text-indigo-primary text-lg">
+                    <li class="hidden sm:block"><a href="features" class="font-montserat font-bold mr-8">Features</a></li>
+                    <li class="hidden sm:block"><a href="#" class="font-montserat font-bold mr-8">Docs</a></li>
+                    <li class="hidden sm:block"><a href="#" class="font-montserat font-bold">Blog</a></li>
+                    <li class="block sm:hidden">
+                        <button class="burger-btn">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </button>
+                    </li>
+                </ul>
+            </nav>
 
-	<section class="container grid grid-cols-12 gap-10 py-8 lg:py-16 items-center">
-		<div class="flex flex-col col-span-6">
-			<h3 class="text-2xl lg:text-3xl font-serif text-indigo-600 font-bold mb-5">Create Engaging Blog Posts using Content Compositions</h3>
-			<p class="text-base lg:text-xl">Content Compositions allow you to embed rich media and flexible design elements in your blog posts making them standout in the world of boring medium-like blog posts.</p>
-		</div>
-		<div class="col-span-6 h-full flex justify-center">
-			<img src="images/undraw_tweetstorm_49e8 1.svg" alt="" class="h-full" />
-		</div>
-	</section>
+            <!-- Hidden menu -->
+            <nav class="bg-white fixed mt-24 hidden-menu right-0 z-50 border-2 ">
+                <ul class="flex flex-col text-indigo-primary text-lg">
+                    <li><a href="features" class="block pl-4 py-3 font-montserat font-bold mr-8">Features</a></li>
+                    <li><a href="#" class="block pl-4 py-3 font-montserat font-bold mr-8">Docs</a></li>
+                    <li><a href="#" class="block pl-4 py-3 font-montserat font-bold">Blog</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
 
-	<section>
-		<div class="bg-white flex flex-col relative">
-			<div class="flex flex-col absolute inset-0 z-0">
-				<div class="bg-white" style="height: 30%;"></div>
-				<div class="bg-gray-700" style="height: 70%;"></div>
-			</div>
-			<svg viewBox="0 0 1439 152" fill="none" xmlns="http://www.w3.org/2000/svg" class="relative z-10">
-				<path d="M0 72.4024C0 72.4024 480.666 163.668 662.54 139.461C844.413 115.254 1439 152 1439 152V17.8332C1439 17.8332 1009.3 -22.2915 719.5 17.8332C429.701 57.9578 0 17.8332 0 17.8332V72.4024Z" fill="#F7DF18" />
-			</svg>
-		</div>
-	  	<div class="bg-gray-700 text-white">
-			<div class="container grid grid-cols-12 gap-10 pb-16 items-center md:-mt-10">
-				<div class="flex flex-col col-span-12 lg:col-span-5">
-					<h3 class="text-2xl md:text-3xl font-serif text-indigo-secondary font-bold mb-5">Run Online Business from Home</h3>
-					<p class="text-base md:text-xl">WebTheory comes with all the tools to help you run your online business from the comfort of your home. Run multiple Ad services, accept payments, create subscription plan, sell your contents - all from a single platform without additional fee.</p>
-				</div>
-				<div class="col-span-12 lg:col-span-7 h-full z-10 order-first lg:order-none">
-					<img src="images/Dashboard Image.png" alt="" class="lg:h-full w-full object-contain md:-m-6 lg:-mt-10" />
-				</div>
-			</div>
-	  	</div>
-	</section>
+    <!-- Hidden header -->
+    <header class="w-full fixed hidden-header left-0 h-24 bg-white z-40 opacity-0">
+        <div class="h-full m-auto max-w-1920 px-6 sm:px-4_5xl md:px-18 flex items-center justify-between relative">
 
-	<section>
-		<div class="bg-gray-800 text-white py-8 lg:py-16">
-			<div class="container flex flex-col items-center">
-			<div class="w-10/12 text-center">
-				<h2 class="font-serif text-3xl font-bold text-yellow-secondary">One Plan to Rule them All</h2>
-				<p class="text-2xl lg:text-3xl">Unlimited User accounts, Unlimited Admin accounts, Unlimited Pages, Unlimited Bandwidth. No barriers. No breaks.</p>
-			</div>
-			</div>
-		</div>
-		<div class="relative">
-			<img src="images/Group 31.png" alt="" class="w-full relative z-10" />
-			<div class="bg-gray-800 absolute top-0 left-0 right-0" style="height: 50%;"></div>
-		</div>
-		<div class="bg-gray-800 py-8 lg:py-16">
-			<div class="flex flex-col container">
-			<h2 class="text-3xl text-yellow-400">Help us build WebTheory together. Sign up for our private beta.</h2>
-			<p class="text-2xl text-gray-500">WebTheory is in private beta. But if you are Interested to try out WebTheory now, do let us know below. We will allocate you as soon as new private beta slots are available.</p>
-			<form action="" class="flex justify-center lg:justify-start text-2xl font-serif mt-3 self-stretch mt-10">
-				<input type="text" class="bg-white rounded-lg shadow-inner text-gray-200 p-3 w-full" placeholder="Enter your email ID" />
-				<button type="button" class="px-10 bg-indigo-700 text-white rounded-lg shadow-lg flex-shrink-0 ml-6">Sign Up</button>
-			</form>
-			</div>
-		</div>
-	</section>
-</main>
+            <!-- Logo -->
+            <div class="flex items-center">
+                <a href="/">
+                    <img class="inline-block" src="img/logo.svg" alt=">">
+                    <span class="font-eczar text-indigo-primary text-2xl sm:text-t175 font-bold ml-2 sm:ml-6">WebTheory</span>
+                </a>
+            </div>
 
-<footer class="bg-gray-900 py-8 lg:py-16">
-	<div class="container grid grid-cols-12 gap-16">
-		<div class="flex flex-col justify-center md:col-span-12 xl:col-span-6">
-			<div class="flex items-center">
-				<svg width="88" height="50" viewBox="0 0 88 50" fill="none" xmlns="http://www.w3.org/2000/svg" class="flex-shrink-0 mr-10">
-					<g clip-path="url(#clip0)">
-					<path d="M34.9104 24.936L8.72759 0H61.0932L87.276 24.936L61.0932 49.872L34.9104 24.936Z" fill="#6C63FF" />
-					<path d="M61.0932 49.8725L34.9104 24.9365L8.72759 49.8725H61.0932Z" fill="#5851CC" />
-					</g>
-					<defs>
-					<clipPath id="clip0">
-						<rect width="87.276" height="49.872" fill="white" />
-					</clipPath>
-					</defs>
-				</svg>
-				<h1 class="text-5xl text-indigo-700">WebTheory</h1>
-			</div>
-			<p class="text-xl text-white mt-5">The web superiority platform for content creators, influencers and businesses</p>
-		</div>
-		<div class="flex flex-col md:col-span-4 xl:col-span-2">
-			<h2 class="text-yellow-400 uppercase text-2xl font-bold">Features</h2>
-			<ul class="flex flex-col text-white text-xl mt-5">
-				<li><a href="">Feature 1</a></li>
-				<li><a href="">Feature 1</a></li>
-				<li><a href="">Feature 1</a></li>
-				<li><a href="">More...</a></li>
-			</ul>
-		</div>
-		<div class="flex flex-col md:col-span-4 xl:col-span-2">
-			<h2 class="text-yellow-400 uppercase text-2xl font-bold">Contact</h2>
-			<ul class="flex flex-col text-white text-xl mt-5">
-				<li><a href="">Facebook</a></li>
-				<li><a href="">Twitter</a></li>
-				<li><a href="">Youtube</a></li>
-				<li><a href="">LinkedIn</a></li>
-			</ul>
-		</div>
-		<div class="flex flex-col md:col-span-4 xl:col-span-2">
-			<h2 class="text-yellow-400 uppercase text-2xl font-bold">Documentation</h2>
-			<ul class="flex flex-col text-white text-xl mt-5">
-				<li><a href="">Page 1</a></li>
-				<li><a href="">Page 1</a></li>
-				<li><a href="">Page 1</a></li>
-				<li><a href="">More...</a></li>
-			</ul>
-		</div>
-	</div>
-</footer>
-@endsection
+            <!-- Menu -->
+            <nav>
+                <ul class="flex text-indigo-primary text-lg">
+                    <li class="hidden sm:block"><a href="features" class="font-montserat font-bold mr-8">Features</a></li>
+                    <li class="hidden sm:block"><a href="#" class="font-montserat font-bold mr-8">Docs</a></li>
+                    <li class="hidden sm:block"><a href="#" class="font-montserat font-bold">Blog</a></li>
+                    <li class="block sm:hidden">
+                        <button class="burger-btn">
+                            <span></span>
+                            <span></span>
+                            <span></span>
+                        </button>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Hidden menu -->
+            <nav class="bg-white fixed mt-24 hidden-menu right-0 z-50 border-2 ">
+                <ul class="flex flex-col text-indigo-primary text-lg">
+                    <li><a href="#" class="block pl-4 py-3 font-montserat font-bold mr-8">Features</a></li>
+                    <li><a href="#" class="block pl-4 py-3 font-montserat font-bold mr-8">Docs</a></li>
+                    <li><a href="#" class="block pl-4 py-3 font-montserat font-bold">Blog</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <!-- First section -->
+    <section class="first-section">
+
+        <!-- Home part -->
+        <div class="first-section-bg relative">
+            <div class="m-auto max-w-1920 px-6 sm:px-4_5xl md:px-18 pt-12">
+                <h1 class="text-indigo-primary font-eczar font-bold text-h1 text-center">
+                    Be the Voice. Not the Echo.
+                </h1>
+                <p class="font-eczar text-xl sm:text-2xl text-center mt-4 leading-8 sm:mb-6 text-darkest-blue">
+                    <span class="inline-block border-b-14 border-green-yellow border-opacity-29 h-10">Web-Superiority Platform</span> for Modern Content Creators, Influencers & Businesses
+                </p>
+                <img class="main-hero-img m-auto left-0 right-0" src="img/Landing page/first-section/main_photo.svg" alt="Main hero">
+            </div>
+        </div>
+
+        <!-- CTA part -->
+        <div class="cta-part bg-dark-blue pt-12 md:pt-40 xl:pt-10 pb-16 flex">
+            <img class="hidden xl:block" src="img/Landing page/cta-section/gift.svg" alt="Present gift">
+            <div class="mt-auto px-6 sm:px-4_5xl md:px-18 xl:pr-18 xl:pl-0 xl:-ml-8">
+                <h3 class="text-yellow-secondary font-eczar text-h3 text-center xl:text-left">Sign Up for Private Beta Today!</h3>
+                <p class="text-xl md:text-2xl text-indigo-faded mt-4 text-center xl:text-left">
+                    WebTheory is in private beta. But if you are Interested to try out WebTheory now, do let us know below. We will allocate you as soon as new private beta slots are available.
+                </p>
+                <form class="mt-8 flex justify-center xl:justify-start">
+                    <input class="py-2 sm:py-1 px-2 shadow-inner-top rounded-lg text-base sm:text-2xl xl:text-h3 w-full max-w-xl" type="text" placeholder="Enter your email ID" required>
+                    <button class="py-2 sm:py-1 w-4/12 md:w-auto px-2 md:px-10 ml-6 sm:ml-8 rounded-lg bg-indigo-primary font-eczar text-white text-base sm:text-2xl xL:text-h3 shadow-button-bottom">Sign Up</button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Second section -->
+    <section class="pt-24">
+
+        <!-- Title and subtitle -->
+        <div class="px-6 sm:px-4_5xl md:px-16 font-eczar text-center mb-12">
+            <h2 class="text-4xl md:text-h1 text-indigo-primary font-bold">Go Viral, Break the Internet!</h2>
+            <p class="text-darkest-blue text-2xl md:text-h3 mt-3">
+                WebTheory is like no other CMS. It is opinionated, radical and foxy.
+            </p>
+        </div>
+
+        <!-- Features -->
+        <div class="bg-light-gray bg-opacity-25  pt-10 pb-12 mb-20">
+            <div class="max-w-1920 px-6 sm:px-4_5xl md:px-18 flex flex-wrap justify-center mx-auto">
+                <div class="w-full mb-8 sm:mb-0 sm:w-1/3 sm:pl-10">
+                    <h3 class="text-indigo-primary font-eczar text-t175 font-bold mb-5">
+                        No Plugin Mess
+                    </h3>
+                    <p class="font-open-sans font-light text-lg">
+                        WebTheory comes prepacked with all the essential features you will realistically ever need. So, no more installing of low-grade third party plugins and modules.
+                    </p>
+                </div>
+                <div class="w-full mb-8 sm:mb-0 sm:w-1/3 sm:pl-10">
+                    <h3 class="text-indigo-primary font-eczar text-t175 font-bold mb-5">
+                        Tools for Business
+                    </h3>
+                    <p class="font-open-sans font-light text-lg">
+                        Run your business from home with the ability to sell contents directly from your site, publish Ads from various networks and  manage users and subscriptions. 
+                    </p>
+                </div>
+                <div class="w-full mb-8 sm:mb-0 sm:w-1/3 sm:pl-10">
+                    <h3 class="text-indigo-primary font-eczar text-t175 font-bold mb-5">
+                        Blazing Fast Performance
+                    </h3>
+                    <p class="font-open-sans font-light text-lg">
+                        Each WebTheory site is hosted on highly optimised and specifically configured dedicated SSD servers, with in-built global CDN, automated backups and full SSL support.
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Actions -->
+        <div class="mb-32">
+            <div class="pt-12 sm:pt-28">
+                <div class="max-w-1920 flex justify-center mx-auto">
+                    <div class="w-10/12 sm:w-5/12 mt-auto pb-8">
+                        <h3 class="text-2xl md:text-h3 font-eczar font-bold text-blue-second">
+                            Create Engaging Blog Posts using Content Compositions
+                        </h3>
+                        <p class="font-open-sans text-base md:text-2xl mt-4">
+                            Content Compositions allow you to embed rich media and flexible design elements in your blog posts making them standout in the world of boring medium-like blog posts.
+                        </p>
+                    </div>
+                    <div class="hidden sm:block sm:w-5/12">
+                        <img class="ml-auto" src="img/Landing page/second-section/img1.svg" alt="Img1">
+                    </div>
+                </div>
+            </div>
+            <div class="bg-auto sm:bg-item pt-28">
+                <div class="max-w-1920 flex justify-center mx-auto">
+                    <div class="hidden sm:block sm:w-5/12">
+                        <img class="mr-auto" src="img/Landing page/second-section/img2.svg" alt="Img2">
+                    </div>
+                    <div class="w-10/12 sm:w-5/12 mt-auto pb-8">
+                        <h3 class="text-2xl md:text-h3 font-eczar font-bold text-blue-second">
+                            Run Online Business from Home
+                        </h3>
+                        <p class="font-open-sans text-base md:text-2xl mt-15">
+                            WebTheory comes with all the tools to help you run your online business from the comfort of your home. Run multiple Ad services, accept payments, create subscription plan, sell your contents - all from a single platform without additional fee.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="pt-28">
+                <div class="max-w-1920 flex justify-center mx-auto">
+                    <div class="w-10/12 sm:w-5/12 mt-auto pb-8">
+                        <h3 class="text-2xl md:text-h3 font-eczar font-bold text-blue-second">
+                            Use Social Media to your Advantage
+                        </h3>
+                        <p class="font-open-sans text-base md:text-2xl mt-8">
+                            WebTheory lets you easily onboard users via Social Login and provides ways for you to interact with them from within the system
+                        </p>
+                    </div>
+                    <div class="hidden sm:block sm:w-5/12">
+                        <img class="ml-auto" src="img/Landing page/second-section/img3.svg" alt="Img3">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Analytics -->
+        <div class="pt-28 analytics-bg py-24">
+            <div class="max-w-1920 mx-auto px-6 sm:px-4_5xl md:px-18 flex flex-col lg:flex-row">
+                <div class="w-full lg:w-1/2 mt-auto">
+                    <h3 class="mt-12 md:mt-0 text-blue-second font-eczar text-4xl leading-10 w-5/6">
+                        Inbuilt Analytics and Advanced Dashboard Capability
+                    </h3>
+                    <p class="font-open-sans text-xl sm:text-t175 text-blue-faded mt-12 pb-12">
+                        WebTheory is equipped with advanced Analytics and Dashboarding Capability without depending on any third-party tool. This ensures a seamless and integrated experience for the site owners.
+                    </p>
+                </div>
+                <img class="w-full lg:w-1/2 order-first lg:order-last" src="img/Landing page/analytics/dashboard.svg" alt="Dashboard">
+            </div>
+        </div>
+    </section>
+
+    <!-- One plan section -->
+    <section>
+
+        <!-- Title & description -->
+        <div class="bg-dark-blue pt-20 pb-24 sm:pb-64">
+            <div class="max-w-1920 mx-auto px-6 sm:px-4_5xl md:px-18">
+                <h2 class="font-eczar font-bold text-t175 md:text-4xl text-yellow-secondary text-center mb-8">
+                    One Plan to Rule them All
+                </h2>
+                <p class="font-eczar text-2xl md:text-t175 text-blue-faded text-center mb-20">
+                    Unlimited User accounts, Unlimited Admin accounts, Unlimited Pages, Unlimited Bandwidth.  No barriers. No breaks. 
+                </p>
+                
+            </div>
+        </div>
+
+        <!-- CTA Form -->
+        <div class="one-plan-cta-bg bg-auto xl:bg-contain -mt-24 sm:-mt-64">
+            <div class="max-w-1920 mx-auto px-6 sm:px-4_5xl md:px-18">
+                <div class="w-full sm:w-10/12 m-auto">
+                    <img class="mx-auto relative" src="img/Landing page/one-plan-section/one-plan-graphics.svg" alt="One plan hero">
+                    <h4 class="font-eczar text-yellow-secondary text-2xl sm:text-h3 mb-6 mt-16">
+                        Help us build WebTheory together. Sign up for our private beta.
+                    </h4>
+                    <p class="text-indigo-faded font-open-sans text-lg sm:text-t175 md:text-2xl">
+                        WebTheory is in private beta. But if you are Interested to try out WebTheory now, do let us know below. We will allocate you as soon as new private beta slots are available.
+                    </p>
+                    <form class="mt-10 pb-20 flex">
+                        <input class="py-1 px-2 shadow-inner-top rounded-lg text-base md:text-2xl w-full max-w-xl" type="text" required>
+                        <button class="py-1 sm:py-1 w-4/12 md:w-auto px-2 md:px-16 ml-6 sm:ml-8 rounded-lg bg-indigo-primary font-eczar text-white text-base md:text-2xl shadow-button-bottom">Sign Up</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="bg-dark-blue pt-24 pb-20">
+        <div class="max-w-1920 mx-auto px-6 sm:px-4_5xl md:px-18 flex flex-wrap">
+
+            <!-- Logo container -->
+            <div class="w-full lg:w-1/2 mb-8 lg:mb-0">
+                <div class="flex items-center mb-6">
+                    <a href="#">
+                        <img class="inline-block" src="img/logo.svg" alt=">">
+                        <span class="font-eczar text-indigo-primary text-4xl font-bold ml-6">WebTheory</span>
+                    </a>
+                </div>
+                <p class="font-eczar text-lighten-gray text-xl">
+                    The web superiority platform for content creators, influencers and  businesses
+                </p>
+            </div>
+
+            <!-- Features container -->
+            <div class="w-full mb-8 sm:mb-0 sm:w-1/3 lg:w-1/6">
+                <h5 class="text-center sm:text-left font-open-sans text-yellow-secondary text-xl font-bold uppercase mb-8">Features</h5>
+                <div class="font-open-sans text-xl text-lighten-gray flex flex-col">
+                    <a href="#">Feature 1</a>
+                    <a href="#">Feature 1</a>
+                    <a href="#">Feature 1</a>
+                    <a href="#">More...</a>
+                </div>
+            </div>
+
+            <!-- Contacts container -->
+            <div class="w-full mb-8 sm:mb-0 sm:w-1/3 lg:w-1/6">
+                <h5 class="text-center sm:text-left font-open-sans text-yellow-secondary text-xl font-bold uppercase mb-8">Contact</h5>
+                <div class="font-open-sans text-xl text-lighten-gray flex flex-col">
+                    <a href="#">Facebook</a>
+                    <a href="#">Twitter</a>
+                    <a href="#">Youtube</a>
+                    <a href="#">LinkedIn</a>
+                </div>
+            </div>
+
+            <!-- Docs container -->
+            <div class="w-full mb-8 sm:mb-0 sm:w-1/3 lg:w-1/6">
+                <h5 class="text-center sm:text-left font-open-sans text-yellow-secondary text-xl font-bold uppercase mb-8">Documentation</h5>
+                <div class="font-open-sans text-xl text-lighten-gray flex flex-col">
+                    <a href="#">Page 1</a>
+                    <a href="#">Page 2</a>
+                    <a href="#">Page 3</a>
+                    <a href="#">More...</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="/js/main.js"></script>
+</body>
+</html>

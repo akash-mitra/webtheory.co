@@ -2,7 +2,16 @@
 
 @section('content')
 <div class="w-full h-screen">
-    <div class="flex justify-center">
+    <div class="row justify-content-center mt-5">
+        <div class="col-sm-10">
+            <h1 class="text-center text-3xl text-gray-700">Get started in minutes</h1>
+            <p class="text-center lead mt-3 mx-auto ">
+                First, let's create your account. Once your account has been created 
+                <br>you can choose the billing plan that is right for you and create your webtheory site.
+            </p>
+        </div>
+    </div>
+    <div class="flex justify-center -mt-6">
         <div class="w-full max-w-lg shadow-lg mt-16 bg-gray-100">
             <div class="border pb-6">
                 <div class="text-indigo-600 text-2xl px-12 py-4 border-b mb-6">{{ __('Register') }}</div>
@@ -62,6 +71,15 @@
                         </div>
 
                         <div class="mb-4 px-12">
+                            <input id="terms" type="checkbox" class="form-check-input" name="terms">
+                            <label for="terms" class="text-gray-700 text-sm">
+                                &nbsp;&nbsp;I agree to the
+                                <a href="#" target="_blank" class="text-blue-600 underline">Terms of Service</a> and
+                                <a href="#" target="_blank" class="text-blue-600 underline">Privacy Policy</a>.
+                            </label>
+                        </div>
+
+                        <div class="mb-4 px-12">
                             <input type="hidden" name="recaptcha" id="recaptcha" value="">
                             <div class="text-xs">
                                 This site is protected by reCAPTCHA and the Google
@@ -70,7 +88,7 @@
                             </div>
                         </div>
                     
-                        <div class="mb-4 px-12">
+                        <div class="mb-2 px-12 text-center">
                             <button onclick="submit_register_form(event)" type="button" class="px-8 py-2 bg-blue-500 text-white rounded shadow font-bold">
                                 {{ __('Register') }}
                             </button>
@@ -97,4 +115,10 @@ function submit_register_form(e) {
     });
 }
 </script>
+@endsection
+
+@section('css')
+<style>
+    .grecaptcha-badge { visibility: hidden; }
+</style>
 @endsection
