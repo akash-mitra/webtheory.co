@@ -167,7 +167,7 @@
         <!-- Actions -->
         <div class="mb-32">
             <div class="pt-12 sm:pt-28">
-                <div class="max-w-1920 flex justify-center mx-auto">
+                <div class="max-w-1920 flex flex-wrap justify-center mx-auto">
                     <div class="w-10/12 sm:w-5/12 mt-auto pb-8">
                         <h3 class="text-2xl md:text-h3 font-eczar font-bold text-blue-second">
                             Create Engaging Blog Posts using Content Compositions
@@ -176,17 +176,17 @@
                             Content Compositions allow you to embed rich media and flexible design elements in your blog posts making them standout in the world of boring medium-like blog posts.
                         </p>
                     </div>
-                    <div class="hidden sm:block sm:w-5/12">
+                    <div class="w-10/12 sm:w-5/12">
                         <img class="ml-auto" src="img/Landing page/second-section/img1.svg" alt="Img1">
                     </div>
                 </div>
             </div>
             <div class="bg-auto sm:bg-item pt-28">
-                <div class="max-w-1920 flex justify-center mx-auto">
-                    <div class="hidden sm:block sm:w-5/12">
+                <div class="max-w-1920 flex flex-wrap justify-center mx-auto">
+                    <div class="order-last sm:order-first w-10/12 sm:w-5/12">
                         <img class="mr-auto" src="img/Landing page/second-section/img2.svg" alt="Img2">
                     </div>
-                    <div class="w-10/12 sm:w-5/12 mt-auto pb-8">
+                    <div class="order-first sm:order-last w-10/12 sm:w-5/12 mt-auto pb-8">
                         <h3 class="text-2xl md:text-h3 font-eczar font-bold text-blue-second">
                             Run Online Business from Home
                         </h3>
@@ -197,7 +197,7 @@
                 </div>
             </div>
             <div class="pt-28">
-                <div class="max-w-1920 flex justify-center mx-auto">
+                <div class="max-w-1920 flex flex-wrap justify-center mx-auto">
                     <div class="w-10/12 sm:w-5/12 mt-auto pb-8">
                         <h3 class="text-2xl md:text-h3 font-eczar font-bold text-blue-second">
                             Use Social Media to your Advantage
@@ -206,7 +206,7 @@
                             WebTheory lets you easily onboard users via Social Login and provides ways for you to interact with them from within the system
                         </p>
                     </div>
-                    <div class="hidden sm:block sm:w-5/12">
+                    <div class="w-10/12 sm:w-5/12">
                         <img class="ml-auto" src="img/Landing page/second-section/img3.svg" alt="Img3">
                     </div>
                 </div>
@@ -266,7 +266,7 @@
     </section>
 
     <!-- Footer -->
-    <footer class="bg-dark-blue pt-24 pb-20">
+    <footer class="bg-dark-blue pt-24 pb-20 -mt-1">
         <div class="max-w-1920 mx-auto px-6 sm:px-4_5xl md:px-18 flex flex-wrap">
 
             <!-- Logo container -->

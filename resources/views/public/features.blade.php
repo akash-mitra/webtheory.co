@@ -94,8 +94,8 @@
 
     <!-- First section -->
     <section class="bg-feat-dark-blue border-feat-yellow border-b-14">
-        <div class="m-auto max-w-1920 px-6 sm:px-4_5xl md:px-18 flex relative pt-20 pb-32">
-            <div class="w-full lg:w-7/12">
+        <div class="m-auto max-w-1920 px-6 sm:px-4_5xl md:px-18 flex relative pt-20 pb-10 pb-32">
+            <div class="w-full xs:w-7/12">
                 <h1 class="font-roboto text-white text-4xl mb-8">
                     Create <b>Contents</b>, Build <b>Audiences</b> and run <b>Business</b>.
                     <br>
@@ -105,7 +105,7 @@
                     WebTheory helps you to become a successful content-creator by streamlining the entire process of content creation, publication, distribution, audience building and even, content selling.
                 </p>
             </div>
-            <div class="hidden lg:block w-5/12 absolute top-0 right-0 mt-2 mr-8">
+            <div class="hidden xs:flex w-5/12 absolute top-0 bottom-0 right-0 mt-8 mt-2 mr-8 items-center">
                 <img class="w-full" src="img/Feature/first-section/podcast.svg" alt="Podcast">
             </div>
         </div>
@@ -445,7 +445,7 @@
                 <h2 class="text-center md:text-left font-eczar font-bold text-h1 text-indigo-primary mb-10">
                     Untangle yourself!
                 </h2>
-                <div class="flex justify-between w-full">
+                <div class="flex flex-wrap justify-between w-full">
                     <div class="w-full xl:w-2/5">
                         <h4 class="font-eczar font-bold text-t175 text-feat-blue-secondary mb-8">
                             Enjoy the Freedom from the mess of costly templates, pricey plugins and low quality hosting services
@@ -454,7 +454,7 @@
                             Instead of relying on a myriad of other 3rd party developers for plugins and templates, WebTheory comes with inbuilt high quality plugins and they work natively and integrates seamlessly with your site at no extra cost.
                         </p>
                     </div>
-                    <div class="hidden xl:block w-1/2">
+                    <div class="w-full mt-8 xl:mt-0 xl:w-1/2">
                         <img class="ml-auto" src="img/Feature/sixth-section/plugin_mess.svg" alt="Plugin Mess">
                     </div>
                 </div>
@@ -467,7 +467,6 @@
         <div class="m-auto max-w-1920 px-6 sm:px-4_5xl md:px-18">
             <!-- Title -->
             <h2 class="font-eczar font-bold text-4xl md:text-h1 text-indigo-primary text-center">
-                <img class="inline-block mb-8" src="img/Feature/seventh-section/users.svg" alt="Users">
                 And Get Native Support for Essential Features
             </h2>
             <p class="font-open-sans text-2xl md:text-t175 text-center mb-24">
