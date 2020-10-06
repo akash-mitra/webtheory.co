@@ -26,6 +26,7 @@ $factory->define(User::class, function (Faker $faker) {
         'remember_token' => Str::random(10),
         'role' => 'registered', 
         'avatar' => 'https://i.pravatar.cc/100?u=' . $faker->unique()->safeEmail, 
+        'public_id' => Str::random(30),
         'address' => $faker->streetAddress,
         'city' => $faker->city,
         'state' => $faker->state,

@@ -31,7 +31,8 @@ Route::post('password/change', 'Auth\ChangePasswordController@change')->name(
 );
 
 // Dashboard
-Route::get('home', 'HomeController@home')->name('home')->middleware('verified');
+// Route::get('home', 'HomeController@home')->name('home')->middleware('verified');
+Route::get('home', 'HomeController@home')->name('home')->middleware('verify.subscription');
 
 // Social Login
 Route::get('social/login/{provider}', 'Auth\SocialLoginController@login')->name(
@@ -81,6 +82,9 @@ Route::get('plans', 'SubscriptionController@plans')->name(
 );
 
 // Subscription
+Route::get('subscriptions/onboard', 'SubscriptionController@onboard')->name(
+    'subscriptions.onboard'
+);
 Route::get('subscriptions/create', 'SubscriptionController@create')->name(
     'subscriptions.create'
 );

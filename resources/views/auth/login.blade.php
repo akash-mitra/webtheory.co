@@ -2,8 +2,11 @@
 
 @section('content')
 <div class="w-full h-screen">
+    <div class="flex justify-center mt-8">
+        <img class="" src="img/logo.svg">
+    </div>
     <div class="flex justify-center">
-        <div class="w-full max-w-lg shadow-lg mt-16 bg-gray-100">
+        <div class="w-full max-w-lg shadow-lg mt-8 bg-gray-100">
             <div class="border pb-6">
                 <div class="text-indigo-600 text-2xl px-12 py-4 border-b mb-6">{{ __('Login') }}</div>
 
@@ -68,7 +71,6 @@
 
                     <div class="mt-8 border-t py-8">
                         <div class="flex justify-between px-12">
-
                                 <div class="col">
                                     <a href="social/login/google">
                                         <svg
@@ -135,7 +137,6 @@
                                         </svg>
                                     </a>
                                 </div>
-
                         </div>
                     </div>
 

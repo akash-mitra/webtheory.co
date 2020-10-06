@@ -22,6 +22,7 @@ class CreateUsersTable extends Migration
             $table->rememberToken();
             $table->string('role', 20)->index();
             $table->string('avatar')->nullable();
+            $table->string('public_id', 30);
             $table->string('address', 255)->nullable();
             $table->string('city', 255)->nullable();
             $table->string('state', 255)->nullable();

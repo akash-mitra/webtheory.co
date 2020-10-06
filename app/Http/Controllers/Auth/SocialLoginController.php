@@ -9,6 +9,7 @@ use Exception;
 use Socialite;
 use App\User;
 use App\LoginProvider;
+use Illuminate\Support\Str;
 
 class SocialLoginController extends Controller
 {
@@ -57,6 +58,7 @@ class SocialLoginController extends Controller
             'email_verified_at' => \Carbon\Carbon::now(),
             'role' => 'registered',
             'avatar' => $authenticatedUser->getAvatar(),
+            'public_id' => Str::random(30),
             'preferences' => ["broadcast","database","mail"],
         ]);
 

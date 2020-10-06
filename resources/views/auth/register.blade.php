@@ -7,7 +7,7 @@
             <h1 class="text-center text-3xl text-gray-700">Get started in minutes</h1>
             <p class="text-center lead mt-3 mx-auto ">
                 First, let's create your account. Once your account has been created 
-                <br>you can choose the billing plan that is right for you and create your webtheory site.
+                <br>you can enter your payment details and create your webtheory site.
             </p>
         </div>
     </div>
@@ -79,19 +79,22 @@
                             </label>
                         </div>
 
-                        <div class="mb-4 px-12">
+                        {{-- <div class="mb-4 px-12">
                             <input type="hidden" name="recaptcha" id="recaptcha" value="">
                             <div class="text-xs">
                                 This site is protected by reCAPTCHA and the Google
                                 <a class="text-blue-600 underline" href="https://policies.google.com/privacy">Privacy Policy</a> and
                                 <a class="text-blue-600 underline" href="https://policies.google.com/terms">Terms of Service</a> apply.
                             </div>
-                        </div>
+                        </div> --}}
                     
                         <div class="mb-2 px-12 text-center">
-                            <button onclick="submit_register_form(event)" type="button" class="px-8 py-2 bg-blue-500 text-white rounded shadow font-bold">
+                            <button type="submit" class="px-8 py-2 bg-blue-500 text-white rounded shadow font-bold">
                                 {{ __('Register') }}
                             </button>
+                            {{-- <button onclick="submit_register_form(event)" type="button" class="px-8 py-2 bg-blue-500 text-white rounded shadow font-bold">
+                                {{ __('Register') }}
+                            </button> --}}
                         </div>
                     </form>
                 </div>
@@ -103,7 +106,7 @@
 
 
 @section('scripts')
-<script src="https://www.google.com/recaptcha/api.js?render={{ env('RECAPTCHA_SITE_KEY') }}"></script>
+{{-- <script src="https://www.google.com/recaptcha/api.js?render={{ env('RECAPTCHA_SITE_KEY') }}"></script>
 
 <script>
 function submit_register_form(e) {
@@ -114,11 +117,11 @@ function submit_register_form(e) {
         });
     });
 }
-</script>
+</script> --}}
 @endsection
 
 @section('css')
-<style>
+{{-- <style>
     .grecaptcha-badge { visibility: hidden; }
-</style>
+</style> --}}
 @endsection

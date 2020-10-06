@@ -18,7 +18,7 @@ class User extends Authenticatable implements MustVerifyEmail
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'email_verified_at', 'role', 'avatar', 
+        'name', 'email', 'password', 'email_verified_at', 'role', 'avatar', 'public_id', 
         'address', 'city', 'state', 'postcode', 'country', 'tax_id', 
         'google2fa_secret', 'preferences', 'slack_webhook', 'country_code', 'mobile_no', 
     ];
@@ -42,6 +42,26 @@ class User extends Authenticatable implements MustVerifyEmail
         'preferences' => 'array',
     ];
 
+    protected $appends = [
+        'created_ago', 
+        'updated_ago', 
+        'url'
+    ];
+
+    public function getCreatedAgoAttribute()
+    {
+        return optional($this->created_at)->diffForHumans();
+    }
+
+    public function getUpdatedAgoAttribute()
+    {
+        return optional($this->updated_at)->diffForHumans();
+    }
+
+    public function getUrlAttribute()
+    {
+        return route('profile.show', $this->public_id);
+    }
 
     // Role
 
@@ -61,6 +81,17 @@ class User extends Authenticatable implements MustVerifyEmail
         return $this->role == 'admin';
     }
 
+    // PublicId
+    public static function findByPublicId($publicId)
+    {
+        $user = User::where('public_id', $publicId)->first();
+
+        if ($user === null) {
+            abort(404, 'User Not Found');
+        }
+
+        return $user;
+    }
 
     // Social Login Providers
 

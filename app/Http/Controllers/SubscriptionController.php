@@ -31,6 +31,27 @@ class SubscriptionController extends Controller
         Stripe::setApiKey(env("STRIPE_SECRET"));
     }
 
+    public function onboard()
+    {
+        $user = Auth::user();
+        
+        $plans = $this->plans();
+
+        $plan = $plans[0];
+
+        $user->createOrGetStripeCustomer($this->customer($user));
+        
+        $paymentMethods = $user->paymentMethods();
+
+        if ($paymentMethods)
+            $intent = $user->createSetupIntent();
+        
+        $site_name = null;
+        $subscribed_plan = null;
+
+        return view('subscription.onboard', compact('plan', 'intent', 'site_name'));
+    }
+
     public function create()
     {
         $user = Auth::user();

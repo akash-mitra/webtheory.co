@@ -1,16 +1,21 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="w-full h-screen container mx-auto px-6">
+<div class="w-full h-full container mx-auto px-6">
     <div class="flex justify-center">
-        <div class="w-full shadow-lg mt-16 bg-white">
+        <div class="w-full shadow-lg mt-16 mb-16 bg-white">
             <div class="border pb-6">
                 <div class="text-indigo-600 text-2xl px-12 py-4 border-b mb-6">{{ __('Dashboard') }}</div>
 
                 <div class="my-4 px-12">
                     
                     {{-- Sites --}}
-                    <div class="mt-4 py-2 text-indigo-600">Sites</div>
+                    <div class="flex justify-between">
+                        <div class="flex mt-4 py-2 text-indigo-600 text-xl">Sites</div>
+                        <a href="subscriptions/create" type="button" class="flex mt-4 px-8 py-2 bg-indigo-700 text-white rounded shadow">
+                            {{ __('Create Site') }}
+                        </a>
+                    </div>
                     <div class="mt-4">
                         @if(count($sites) > 0)
                         <div class="bg-white w-full overflow-x-auto shadow border rounded whitespace-no-wrap">
@@ -57,14 +62,10 @@
                             </table>    
                         </div>
                         @endif
-
-                        <a href="subscriptions/create" type="button" class="mt-4 px-8 py-2 bg-indigo-700 text-white rounded shadow">
-                            {{ __('Create Site') }}
-                        </a>
                     </div>
 
                     {{-- Billing --}}
-                    <div class="mt-4 py-2 border-b text-indigo-600">Billing</div>
+                    <div class="mt-4 py-2 text-indigo-600 text-xl">Billing</div>
                     <div class="mt-4">
                         @if(count($sites) > 0)
                         <div class="bg-white w-full overflow-x-auto shadow border rounded whitespace-no-wrap">
@@ -104,7 +105,12 @@
                     </div>
 
                     {{-- Profile --}}
-                    <div class="mt-4 py-2 border-b text-indigo-600">Profile</div>
+                    <div class="flex justify-between border-b">
+                        <div class="flex mt-4 mb-2 py-2 text-indigo-600 text-xl">Profile</div>
+                        <a href="#" type="button" class="flex mt-4 mb-2 px-8 py-2 bg-indigo-700 text-white rounded shadow">
+                            {{ __('Update Profile') }}
+                        </a>
+                    </div>
                     <div class="md:flex bg-white rounded-lg p-6">
                         @if(Auth::user()->avatar)
                             <img class="h-16 w-16 md:h-24 md:w-24 rounded-full mx-auto md:mx-0 md:mr-6" src="{{ Auth::user()->avatar }}">
@@ -118,15 +124,16 @@
                             <h2 class="text-lg">{{ Auth::user()->name }}</h2>
                             <div class="text-purple-500">Registered</div>
                             <div class="text-gray-600">{{ Auth::user()->email }}</div>
-                            <div class="text-gray-600">{{ Auth::user()->country_code . '-' . Auth::user()->mobile_no }}</div>
+                            {{-- <div class="text-gray-600">{{ Auth::user()->country_code . '-' . Auth::user()->mobile_no }}</div> --}}
+                            <div class="text-gray-700">{{ Auth::user()->created_ago }}</div>
                         </div>
                     </div>
                     
                     {{-- Security --}}
-                    <div class="mt-4 py-2 border-b text-indigo-600">Security</div>
+                    <div class="mt-4 py-2 border-b text-indigo-600 text-xl">Security</div>
                     
                     <div class="mt-4">
-                        <a href="password/change" type="button" class="px-8 py-2 bg-blue-700 text-white rounded shadow">
+                        <a href="password/change" type="button" class="px-8 py-2 bg-indigo-700 text-white rounded shadow">
                             {{ __('Change Password') }}
                         </a>
                     </div>

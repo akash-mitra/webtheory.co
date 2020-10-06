@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Str;
 
 class UsersTableSeeder extends Seeder
 {
@@ -19,6 +20,7 @@ class UsersTableSeeder extends Seeder
             'password' => Hash::make(env('ADMIN_USER_PASSWORD', 'Passw0rd')),
             'role' => 'admin',
             'avatar' => 'https://i.pravatar.cc/100?u=' . env('ADMIN_USER_EMAIL', 'admin@example.com'),
+            'public_id' => Str::random(30),
             'preferences' => '["broadcast", "database", "mail"]',
             'created_at' => now(),
             'updated_at' => now(),
